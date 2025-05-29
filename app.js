@@ -20,7 +20,11 @@ app.listen(port, () => {
 });
 
 app.get = ("/api/movies", (req, res) => {
-    console.log(`Elenco Libri`)
+    console.log(`Elenco Film`)
+});
+
+app.get = ("/api/movies/:id", (req, res) => {
+    console.log(`Dettaglio Film e recensione con id ${req.params.id}`)
 });
 
 const connection = require(`./data/db`)
