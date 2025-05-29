@@ -6,8 +6,9 @@ const port = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
 
-
 app.use(express.static(`public`));
+
+const errorHandler = require("./middlewares/errorsHandler")
 
 app.get("/", (req, res) => {
     res.send(`Movies API server`)
