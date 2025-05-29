@@ -19,4 +19,8 @@ app.listen(port, () => {
     console.log(`Server in ascolto sulla porta ${port}`)
 });
 
+app.get = ("/api/movies", (req, res) => {
+    console.log(`Elenco Libri`)
+});
+
 const connection = require(`./data/db`)
