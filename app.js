@@ -8,6 +8,10 @@ app.use(express.json());
 
 app.use(express.static(`public`));
 
+const moviesRouter = require(`./router/moviesRouter`)
+
+app.use(`/api/movies`, moviesRouter);
+
 const errorHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")
 
@@ -17,14 +21,6 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server in ascolto sulla porta ${port}`)
-});
-
-app.get = ("/api/movies", (req, res) => {
-    console.log(`Elenco Film`)
-});
-
-app.get = ("/api/movies/:id", (req, res) => {
-    console.log(`Dettaglio Film e recensione con id ${req.params.id}`)
 });
 
 const connection = require(`./data/db`)
