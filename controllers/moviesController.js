@@ -13,11 +13,28 @@ const index = (req, res) => {
 const show = (req, res) => {
     const { id } = req.params
     const moviesSql = `SELECT * FROM movies WHERE id = ?`
-
+    const reviewsSql = `
+    SELECT *
+    FROM reviews
+    WHERE movie_id = ?
+    `
     connection.query(moviesSql, [id], (err, moviesResult) => {
-        if (err) return res.status(500).json({ error: `Database query failed` + err })
-        res.json(moviesResult);
-    })
-};
+        if (err) return res.status(500).json({ error: `Database query failed` + err });
 
-module.exports = { index, show }
+        if (moviesResult.length === 0 || moviesResult[0].id === null) {
+            return res.status(404).json({ error: `Not Found` })
+        }
+
+
+        const movie = moviesResult[0];
+
+        connection.query(reviewsSql, [id], (err, reviewResult) => {
+            if (err) return res.status(500).json({ error: `Database query failed` + err })
+
+            movie.reviews = reviewResult
+            res.json(movie);
+        })
+    });
+}
+
+module.exports = { index, show };
