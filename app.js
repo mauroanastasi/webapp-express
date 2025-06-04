@@ -12,12 +12,13 @@ app.use(express.static(`public`));
 app.use(cors({ origin: process.env.FE_APP }));
 
 const moviesRouter = require(`./router/moviesRouter`)
+const imagePathMiddleware = require(`./middlewares/imagePath`)
 
 app.use(`/api/movies`, moviesRouter);
 
 const errorHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")
-
+app.use(imagePathMiddleware)
 
 app.get("/", (req, res) => {
     res.send(`Movies API server`)
