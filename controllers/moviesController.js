@@ -39,8 +39,11 @@ const show = (req, res) => {
             if (err) return res.status(500).json({ error: `Database query failed` + err })
 
             movie.reviews = reviewResult
-            res.json(movie);
+
+            res.json({ ...movie, image: req.imagePath + movie.image });
         })
+
+
     });
 }
 
