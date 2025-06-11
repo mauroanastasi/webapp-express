@@ -52,4 +52,19 @@ const show = (req, res) => {
     });
 }
 
+const storeReview = (req, res) => {
+    const { id } = req.params
+
+    const { text, author, vote } = req.body;
+
+    const sql = "INSERT INTO reviews (text, vote, author, movie_id) VALUE(?,?,?,?)";
+
+    connection.query(sql, [text, author, vote, id], (err, result) => {
+        if (err) return res.status(500).json({ error: `Database query failed` })
+
+        res.status(201).json({ message: "Recensione aggiunta", id: result.insertId })
+    })
+
+}
+
 module.exports = { index, show, storeReview }; 
