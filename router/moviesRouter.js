@@ -8,4 +8,8 @@ router.get(`/`, moviesController.index);
 
 router.get(`/:id`, moviesController.show);
 
+const upload = require(`../middlewares/multer`)
+
+router.post(`/id/review`, moviesController.storeReview)
+
 module.exports = router;

@@ -24,6 +24,7 @@ const show = (req, res) => {
     FROM movies M 
     JOIN reviews R ON R.movie_id = M.id
     WHERE M.id = ?`
+
     const reviewsSql = `
     SELECT *
     FROM reviews
@@ -51,4 +52,4 @@ const show = (req, res) => {
     });
 }
 
-module.exports = { index, show };
+module.exports = { index, show, storeReview }; 
